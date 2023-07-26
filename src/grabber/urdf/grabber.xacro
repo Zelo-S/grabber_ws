@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<robot name="grabber" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find grabber_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find grabber_description)/urdf/grabber.trans" />
+<xacro:include filename="$(find grabber_description)/urdf/grabber.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-2.3160092400488117e-17 1.1580046200244058e-17 0.024999999999999994" rpy="0 0 0"/>
+    <mass value="12.330751165339937"/>
+    <inertia ixx="0.033396" iyy="0.033396" izz="0.061654" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://grabber_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://grabber_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rotator_1_1">
+  <inertial>
+    <origin xyz="0.0 -0.00395104235399263 0.05788614892425671" rpy="0 0 0"/>
+    <mass value="11.624112671235805"/>
+    <inertia ixx="0.043574" iyy="0.04365" izz="0.025581" ixy="0.0" iyz="0.004053" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://grabber_description/meshes/rotator_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://grabber_description/meshes/rotator_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="arm_1_1">
+  <inertial>
+    <origin xyz="-6.377389282233048e-18 0.02 0.07999999999999993" rpy="0 0 0"/>
+    <mass value="5.597536149163512"/>
+    <inertia ixx="0.02434" iyy="0.026369" izz="0.003521" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.0 -0.21" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://grabber_description/meshes/arm_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.0 -0.21" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://grabber_description/meshes/arm_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Revolute 1" type="continuous">
+  <origin xyz="0.0 0.0 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rotator_1_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Revolute 2" type="revolute">
+  <origin xyz="0.0 0.0 0.16" rpy="0 0 0"/>
+  <parent link="rotator_1_1"/>
+  <child link="arm_1_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit upper="1.570796" lower="-1.570796" effort="100" velocity="100"/>
+</joint>
+
+</robot>
