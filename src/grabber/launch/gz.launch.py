@@ -64,5 +64,5 @@ def generate_launch_description():
         spawn_entity_node,
         joint_state_broadcaster_node,
         joint_velocity_spawner,
-        # joint_position_spawner
+        joint_position_spawner
     ])
