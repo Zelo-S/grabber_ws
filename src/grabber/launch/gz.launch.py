@@ -46,23 +46,17 @@ def generate_launch_description():
         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
     )
     
-    joint_velocity_spawner = Node(
+    joint_trajectory_controller = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_velocity_controller", "--controller-manager", "/controller_manager"],
+        arguments=["joint_trajectory_controller", "--controller-manager", "/controller_manager"],
     )
 
-    joint_position_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_position_controller", "--controller-manager", "/controller_manager"],
-    )
     
     return LaunchDescription([
         gazebo,
         robot_state_publisher_node,
         spawn_entity_node,
         joint_state_broadcaster_node,
-        joint_velocity_spawner,
-        joint_position_spawner
+        joint_trajectory_controller
     ])

@@ -4,25 +4,22 @@ controller_manager:
     
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
+  
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController 
     
-    joint_velocity_controller:
-      type: velocity_controllers/JointGroupVelocityController
-    
-    joint_position_controller:
-      type: position_controllers/JointGroupPositionController
-      
-joint_velocity_controller:
+joint_trajectory_controller:
   ros__parameters:
     joints:
       - base_rotater_joint
       - rotator_arm_joint
+    
     command_interfaces:
+      - position
+    
+    state_interfaces:
+      - position
       - velocity
     
-joint_position_controller:
-  ros__parameters:
-    joints:
-      - base_rotater_joint
-      - rotator_arm_joint
-    command_interfaces:
-      - position 
+    action_monitor_rate: 20.0
+    open_loop_control: true
