@@ -13,7 +13,7 @@ class BasicNode(Node):
         
     def timer_callback(self):
         pt = JointTrajectoryPoint()
-        pt.positions = [1.0, 1.0]
+        pt.positions = [0.0, 0.5]
         pt.time_from_start = Duration(sec=2)
         
         traj = JointTrajectory()
